@@ -82,7 +82,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         markerGku2.setOnClickListener {
-            showGedung(gku2)
+            val intent = Intent(this, DenahGku2Activity::class.java)
+            startActivity(intent)
         }
 
         checkPermissionAndStart()
