@@ -64,14 +64,16 @@ class MainActivity : AppCompatActivity() {
         txtDistance = findViewById(R.id.txtDistance)
 
         mapContainer.post {
-            val width = mapContainer.width
-            val height = mapContainer.height
+            val width = mapContainer.width.toFloat()
+            val height = mapContainer.height.toFloat()
 
-            markerGku1.x = width * 0.70f - markerGku1.width / 2
-            markerGku1.y = height * 0.53f - markerGku1.height
+            if (width == 0f || height == 0f) return@post
 
-            markerGku2.x = width * 0.52f - markerGku2.width / 2
-            markerGku2.y = height * 0.58f - markerGku2.height
+            markerGku1.x = width * 0.59f - markerGku1.width / 2
+            markerGku1.y = height * 0.47f - markerGku1.height
+
+            markerGku2.x = width * 0.41f - markerGku2.width / 2
+            markerGku2.y = height * 0.52f - markerGku2.height
         }
 
         markerGku1.setOnClickListener {
