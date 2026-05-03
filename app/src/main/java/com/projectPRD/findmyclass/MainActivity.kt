@@ -3,6 +3,7 @@ package com.projectPRD.findmyclass
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
+import android.content.Intent
 import android.location.Location
 import android.os.Bundle
 import android.os.Looper
@@ -74,7 +75,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         markerGku1.setOnClickListener {
-            showGedung(gku1)
+            val intent = Intent(this, DenahGku1Activity::class.java)
+            startActivity(intent)
         }
 
         markerGku2.setOnClickListener {
