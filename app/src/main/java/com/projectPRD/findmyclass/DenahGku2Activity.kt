@@ -11,48 +11,56 @@ class DenahGku2Activity : AppCompatActivity() {
     private lateinit var imgUserMarker: ImageView
     private lateinit var txtTitleDenah: TextView
 
+    private lateinit var btnLtd: TextView
     private lateinit var btnLt1: TextView
     private lateinit var btnLt2: TextView
     private lateinit var btnLt3: TextView
-    private lateinit var btnLt5: TextView
 
-    private var currentFloor = 1
+    private var currentFloor = "LTD"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_denah_gku2)
 
+        val floor = intent.getStringExtra("FLOOR") ?: "LTD"
+
         imgFloorMap = findViewById(R.id.imgFloorMap)
         imgUserMarker = findViewById(R.id.imgUserMarker)
         txtTitleDenah = findViewById(R.id.txtTitleDenah)
 
+        btnLtd = findViewById(R.id.btnLtd)
         btnLt1 = findViewById(R.id.btnLt1)
         btnLt2 = findViewById(R.id.btnLt2)
         btnLt3 = findViewById(R.id.btnLt3)
-        btnLt5 = findViewById(R.id.btnLt5)
 
         findViewById<TextView>(R.id.btnBack).setOnClickListener {
             finish()
         }
 
-        btnLt1.setOnClickListener { showFloor(1) }
-        btnLt2.setOnClickListener { showFloor(2) }
-        btnLt3.setOnClickListener { showFloor(3) }
-        btnLt5.setOnClickListener { showFloor(5) }
+        btnLtd.setOnClickListener { showFloor("LTD") }
+        btnLt1.setOnClickListener { showFloor("LT1") }
+        btnLt2.setOnClickListener { showFloor("LT2") }
+        btnLt3.setOnClickListener { showFloor("LT3") }
 
-        showFloor(1)
+        showFloor(floor)
     }
 
-    private fun showFloor(floor: Int) {
+    private fun showFloor(floor: String) {
         currentFloor = floor
 
-        txtTitleDenah.text = "GKU 2 - Lantai $floor"
+        txtTitleDenah.text = when (floor) {
+            "LTD" -> "GKU 2 - Lantai Dasar"
+            "LT1" -> "GKU 2 - Lantai 1"
+            "LT2" -> "GKU 2 - Lantai 2"
+            "LT3" -> "GKU 2 - Lantai 3"
+            else -> "GKU 2 - Lantai Dasar"
+        }
 
         val imageRes = when (floor) {
-            1 -> R.drawable.gku2_ltd
-            2 -> R.drawable.gku2_lt1
-            3 -> R.drawable.gku2_lt2
-            5 -> R.drawable.gku2_lt3
+            "LTD" -> R.drawable.gku2_ltd
+            "LT1" -> R.drawable.gku2_lt1
+            "LT2" -> R.drawable.gku2_lt2
+            "LT3" -> R.drawable.gku2_lt3
             else -> R.drawable.gku2_ltd
         }
 
@@ -64,10 +72,10 @@ class DenahGku2Activity : AppCompatActivity() {
 
     private fun updateFloorButtons() {
         val buttons = listOf(
-            1 to btnLt1,
-            2 to btnLt2,
-            3 to btnLt3,
-            5 to btnLt5
+            "LTD" to btnLtd,
+            "LT1" to btnLt1,
+            "LT2" to btnLt2,
+            "LT3" to btnLt3
         )
 
         buttons.forEach { (floor, button) ->
@@ -81,22 +89,22 @@ class DenahGku2Activity : AppCompatActivity() {
         }
     }
 
-    private fun updateUserPositionDummy(floor: Int) {
+    private fun updateUserPositionDummy(floor: String) {
         imgUserMarker.post {
             when (floor) {
-                1 -> {
+                "LTD" -> {
                     imgUserMarker.x = 220f
                     imgUserMarker.y = 220f
                 }
-                2 -> {
+                "LT1" -> {
                     imgUserMarker.x = 170f
                     imgUserMarker.y = 190f
                 }
-                3 -> {
+                "LT2" -> {
                     imgUserMarker.x = 245f
                     imgUserMarker.y = 230f
                 }
-                5 -> {
+                "LT3" -> {
                     imgUserMarker.x = 200f
                     imgUserMarker.y = 170f
                 }

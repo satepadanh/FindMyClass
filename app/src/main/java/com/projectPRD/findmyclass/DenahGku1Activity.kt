@@ -22,6 +22,8 @@ class DenahGku1Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_denah_gku1)
 
+        val floor = intent.getStringExtra("FLOOR")?.toIntOrNull() ?: 1
+
         imgFloorMap = findViewById(R.id.imgFloorMap)
         imgUserMarker = findViewById(R.id.imgUserMarker)
         txtTitleDenah = findViewById(R.id.txtTitleDenah)
@@ -40,7 +42,7 @@ class DenahGku1Activity : AppCompatActivity() {
         btnLt3.setOnClickListener { showFloor(3) }
         btnLt5.setOnClickListener { showFloor(5) }
 
-        showFloor(1)
+        showFloor(floor)
     }
 
     private fun showFloor(floor: Int) {

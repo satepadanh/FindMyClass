@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#DDEFF0">
@@ -60,32 +62,35 @@
 
     <!-- Search bar -->
     <LinearLayout
+        android:id="@+id/searchContainer"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginTop="48dp"
-        android:background="@drawable/bg_search"
-        android:elevation="8dp"
-        android:gravity="center_vertical"
+        android:layout_margin="16dp"
         android:orientation="horizontal"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp">
+        android:background="@drawable/bg_search"
+        android:elevation="6dp"
+        android:padding="8dp">
 
-        <TextView
+        <AutoCompleteTextView
+            android:id="@+id/searchBar"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Ruangan apa yang Anda cari?"
-            android:textColor="#B8B8B8"
-            android:textSize="16sp" />
+            android:hint="Ruangan apa yang Anda cari?"
+            android:background="@android:color/transparent"
+            android:singleLine="true"
+            android:completionThreshold="1" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/btnMenuRoom"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:gravity="center"
             android:text="☰"
-            android:textColor="#6AA6AD"
-            android:textSize="24sp" />
+            android:textColor="#6A9FA4"
+            android:textSize="28sp"
+            android:background="@android:color/transparent" />
+
     </LinearLayout>
 
     <!-- Card bawah -->

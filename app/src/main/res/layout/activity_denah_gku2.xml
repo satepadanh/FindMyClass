@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
         android:layout_marginTop="160dp"
-        android:text="GKU 2 - Lantai 1"
+        android:text="GKU 2 - Lantai Dasar"
         android:textColor="#111111"
         android:textSize="16sp"
         android:textStyle="bold" />
@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitCenter"
-            android:src="@drawable/gku2_lt1" />
+            android:src="@drawable/gku2_ltd" />
 
         <View
             android:id="@+id/pathLine"
@@ -69,14 +69,14 @@
         android:padding="4dp">
 
         <TextView
-            android:id="@+id/btnLt5"
+            android:id="@+id/btnLtd"
             style="@style/FloorButton"
-            android:text="L5" />
+            android:text="LTD" />
 
         <TextView
-            android:id="@+id/btnLt3"
+            android:id="@+id/btnLt1"
             style="@style/FloorButton"
-            android:text="L3" />
+            android:text="L1" />
 
         <TextView
             android:id="@+id/btnLt2"
@@ -84,9 +84,9 @@
             android:text="L2" />
 
         <TextView
-            android:id="@+id/btnLt1"
+            android:id="@+id/btnLt3"
             style="@style/FloorButton"
-            android:text="L1" />
+            android:text="L3" />
 
     </LinearLayout>
 
