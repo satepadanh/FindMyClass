@@ -31,8 +31,8 @@ class MainActivity : AppCompatActivity() {
     data class Gedung(
         val nama: String,
         val detail: String,
-        val latitude: Double,
-        val longitude: Double
+        val latitude: Double,   // GPS latitude (derajat desimal)
+        val longitude: Double   // GPS longitude (derajat desimal)
     )
 
     data class Destination(
@@ -70,18 +70,19 @@ class MainActivity : AppCompatActivity() {
         Destination("GKU2", "LT3", "K2_9657", "K2.9657")
     )
 
+    // ✅ FIX: koordinat GPS nyata (sebelumnya berisi nilai piksel yang salah)
     private val gku1 = Gedung(
         nama = "GKU 1",
         detail = "K1.9675-K1.9680b, Student Lounge, Ditsama",
-        latitude = 192.0,
-        longitude = 365.5,
+        latitude  = -6.928879,
+        longitude = 107.769631
     )
 
     private val gku2 = Gedung(
         nama = "GKU 2",
         detail = "K2.9653-K2.9657, Indomaret, Kantin",
-        latitude = 128.0,
-        longitude = 404.5
+        latitude  = -6.929611,
+        longitude = 107.768831
     )
 
     private var currentGedung: Gedung? = null
@@ -95,12 +96,12 @@ class MainActivity : AppCompatActivity() {
         val floor = intent.getStringExtra("FLOOR")?.toIntOrNull() ?: 5
 
         val mapContainer = findViewById<FrameLayout>(R.id.mapContainer)
-        val markerGku1 = findViewById<FrameLayout>(R.id.markerGku1)
-        val markerGku2 = findViewById<FrameLayout>(R.id.markerGku2)
+        val markerGku1   = findViewById<FrameLayout>(R.id.markerGku1)
+        val markerGku2   = findViewById<FrameLayout>(R.id.markerGku2)
 
-        infoCard = findViewById(R.id.infoCard)
-        txtGedung = findViewById(R.id.txtGedung)
-        txtDetail = findViewById(R.id.txtDetail)
+        infoCard    = findViewById(R.id.infoCard)
+        txtGedung   = findViewById(R.id.txtGedung)
+        txtDetail   = findViewById(R.id.txtDetail)
         txtDistance = findViewById(R.id.txtDistance)
 
         val searchBar = findViewById<AutoCompleteTextView>(R.id.searchBar)
@@ -149,26 +150,25 @@ class MainActivity : AppCompatActivity() {
         }
 
         mapContainer.post {
-            val width = mapContainer.width.toFloat()
+            val width  = mapContainer.width.toFloat()
             val height = mapContainer.height.toFloat()
-
             if (width == 0f || height == 0f) return@post
 
-            markerGku1.x = width * 0.59f - markerGku1.width / 2
+            markerGku1.x = width  * 0.59f - markerGku1.width  / 2
             markerGku1.y = height * 0.47f - markerGku1.height
 
-            markerGku2.x = width * 0.41f - markerGku2.width / 2
+            markerGku2.x = width  * 0.41f - markerGku2.width  / 2
             markerGku2.y = height * 0.52f - markerGku2.height
         }
 
         markerGku1.setOnClickListener {
-            val intent = Intent(this, DenahGku1Activity::class.java)
-            startActivity(intent)
+            showGedung(gku1)
+            startActivity(Intent(this, DenahGku1Activity::class.java))
         }
 
         markerGku2.setOnClickListener {
-            val intent = Intent(this, DenahGku2Activity::class.java)
-            startActivity(intent)
+            showGedung(gku2)
+            startActivity(Intent(this, DenahGku2Activity::class.java))
         }
 
         checkPermissionAndStart()
@@ -225,18 +225,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun showGedung(gedung: Gedung) {
         currentGedung = gedung
-
-        txtGedung.text = gedung.nama
-        txtDetail.text = gedung.detail
+        txtGedung.text   = gedung.nama
+        txtDetail.text   = gedung.detail
         txtDistance.text = "Menghitung jarak..."
-
         infoCard.visibility = View.VISIBLE
     }
 
     private fun checkPermissionAndStart() {
         if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
+                this, Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
             startLocationUpdates()
@@ -262,7 +259,7 @@ class MainActivity : AppCompatActivity() {
                 val gedung = currentGedung ?: return
 
                 val targetLocation = Location("").apply {
-                    latitude = gedung.latitude
+                    latitude  = gedung.latitude
                     longitude = gedung.longitude
                 }
 
@@ -289,7 +286,6 @@ class MainActivity : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
         if (requestCode == 100 &&
             grantResults.isNotEmpty() &&
             grantResults[0] == PackageManager.PERMISSION_GRANTED
@@ -300,7 +296,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-
         if (::locationCallback.isInitialized) {
             fusedLocationClient.removeLocationUpdates(locationCallback)
         }

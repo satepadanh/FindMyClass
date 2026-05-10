@@ -94,6 +94,17 @@
             style="@style/FloorButton"
             android:text="L1" />
 
+        <TextView
+            android:id="@+id/txtEspStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:paddingHorizontal="12dp"
+            android:text="Mencari sinyal ESP..."
+            android:textSize="10sp"
+            android:textColor="#AAFFFFFF"
+            android:gravity="center"
+            android:fontFamily="monospace" />
     </LinearLayout>
 
 </FrameLayout>
