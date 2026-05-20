@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.ImageView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.app.AlertDialog
@@ -27,6 +28,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var txtDetail: TextView
     private lateinit var txtDistance: TextView
     private lateinit var infoCard: LinearLayout
+
+    private lateinit var userMarker: ImageView
 
     data class Gedung(
         val nama: String,
@@ -85,6 +88,12 @@ class MainActivity : AppCompatActivity() {
         longitude = 107.768831
     )
 
+    private val MIN_LAT = -6.9305
+    private val MAX_LAT = -6.9280
+
+    private val MIN_LON = 107.7680
+    private val MAX_LON = 107.7700
+
     private var currentGedung: Gedung? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -98,6 +107,8 @@ class MainActivity : AppCompatActivity() {
         val mapContainer = findViewById<FrameLayout>(R.id.mapContainer)
         val markerGku1   = findViewById<FrameLayout>(R.id.markerGku1)
         val markerGku2   = findViewById<FrameLayout>(R.id.markerGku2)
+
+        userMarker = findViewById(R.id.userMarker)
 
         infoCard    = findViewById(R.id.infoCard)
         txtGedung   = findViewById(R.id.txtGedung)
@@ -159,6 +170,9 @@ class MainActivity : AppCompatActivity() {
 
             markerGku2.x = width  * 0.41f - markerGku2.width  / 2
             markerGku2.y = height * 0.52f - markerGku2.height
+
+            userMarker.x = width * 0.50f
+            userMarker.y = height * 0.60f
         }
 
         markerGku1.setOnClickListener {
@@ -256,6 +270,18 @@ class MainActivity : AppCompatActivity() {
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(result: LocationResult) {
                 val currentLocation = result.lastLocation ?: return
+
+                val mapContainer = findViewById<FrameLayout>(R.id.mapContainer)
+
+                val x = ((currentLocation.longitude - MIN_LON) /
+                        (MAX_LON - MIN_LON)) * mapContainer.width
+
+                val y = ((MAX_LAT - currentLocation.latitude) /
+                        (MAX_LAT - MIN_LAT)) * mapContainer.height
+
+                userMarker.x = x.toFloat() - userMarker.width / 2
+                userMarker.y = y.toFloat() - userMarker.height / 2
+
                 val gedung = currentGedung ?: return
 
                 val targetLocation = Location("").apply {
