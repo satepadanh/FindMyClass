@@ -52,4 +52,70 @@
             android:visibility="gone" />
     </FrameLayout>
 
-    <!-- Wrappe
+    <!-- Status ESP -->
+    <TextView
+        android:id="@+id/txtEspStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="140dp"
+        android:text="Mencari sinyal ESP..."
+        android:textColor="#111111"
+        android:textSize="12sp" />
+
+    <!-- Group tombol lantai -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/bg_floor_group"
+        android:orientation="horizontal"
+        android:padding="6dp">
+
+        <TextView
+            android:id="@+id/btnLt1"
+            android:layout_width="52dp"
+            android:layout_height="42dp"
+            android:background="@drawable/bg_floor_selected"
+            android:gravity="center"
+            android:text="L1"
+            android:textColor="#111111"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/btnLt2"
+            android:layout_width="52dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="6dp"
+            android:background="@drawable/bg_floor_unselected"
+            android:gravity="center"
+            android:text="L2"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/btnLt3"
+            android:layout_width="52dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="6dp"
+            android:background="@drawable/bg_floor_unselected"
+            android:gravity="center"
+            android:text="L3"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/btnLt5"
+            android:layout_width="52dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="6dp"
+            android:background="@drawable/bg_floor_unselected"
+            android:gravity="center"
+            android:text="L5"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</FrameLayout>
