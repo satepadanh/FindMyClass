@@ -279,7 +279,7 @@ class MainActivity : AppCompatActivity() {
                         (MAX_LAT - MIN_LAT)) * mapContainer.height
 
                 userMarker.x = x.toFloat() - userMarker.width / 2 - 40
-                userMarker.y = y.toFloat() - userMarker.height / 2 - 280
+                userMarker.y = y.toFloat() - userMarker.height / 2 - 420
 
                 val gedung = currentGedung ?: return
 
