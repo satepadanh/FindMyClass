@@ -272,14 +272,34 @@ class MainActivity : AppCompatActivity() {
 
                 val mapContainer = findViewById<FrameLayout>(R.id.mapContainer)
 
-                val x = ((currentLocation.longitude - MIN_LON) /
-                        (MAX_LON - MIN_LON)) * mapContainer.width
+                val width = mapContainer.width.toFloat()
+                val height = mapContainer.height.toFloat()
 
-                val y = ((MAX_LAT - currentLocation.latitude) /
-                        (MAX_LAT - MIN_LAT)) * mapContainer.height
+                val gku1PixelX = width * 0.59f
+                val gku1PixelY = height * 0.47f
 
-                userMarker.x = x.toFloat() - userMarker.width / 2 - 40
-                userMarker.y = y.toFloat() - userMarker.height / 2 - 420
+                val gku2PixelX = width * 0.41f
+                val gku2PixelY = height * 0.52f
+
+                val gku1Lat = gku1.latitude
+                val gku1Lon = gku1.longitude
+
+                val gku2Lat = gku2.latitude
+                val gku2Lon = gku2.longitude
+
+                val lonRatio =
+                    (currentLocation.longitude - gku2Lon) /
+                            (gku1Lon - gku2Lon)
+
+                val latRatio =
+                    (currentLocation.latitude - gku2Lat) /
+                            (gku1Lat - gku2Lat)
+
+                val x = gku2PixelX + (lonRatio * (gku1PixelX - gku2PixelX))
+                val y = gku2PixelY + (latRatio * (gku1PixelY - gku2PixelY))
+
+                userMarker.x = x.toFloat() - userMarker.width / 2
+                userMarker.y = y.toFloat() - userMarker.height / 2
 
                 val gedung = currentGedung ?: return
 
