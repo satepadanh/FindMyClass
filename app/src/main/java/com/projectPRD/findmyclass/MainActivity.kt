@@ -73,7 +73,6 @@ class MainActivity : AppCompatActivity() {
         Destination("GKU2", "LT3", "K2_9657", "K2.9657")
     )
 
-    // ✅ FIX: koordinat GPS nyata (sebelumnya berisi nilai piksel yang salah)
     private val gku1 = Gedung(
         nama = "GKU 1",
         detail = "K1.9675-K1.9680b, Student Lounge, Ditsama",
@@ -279,8 +278,8 @@ class MainActivity : AppCompatActivity() {
                 val y = ((MAX_LAT - currentLocation.latitude) /
                         (MAX_LAT - MIN_LAT)) * mapContainer.height
 
-                userMarker.x = x.toFloat() - userMarker.width / 2
-                userMarker.y = y.toFloat() - userMarker.height / 2
+                userMarker.x = x.toFloat() - userMarker.width / 2 - 40
+                userMarker.y = y.toFloat() - userMarker.height / 2 - 280
 
                 val gedung = currentGedung ?: return
 
