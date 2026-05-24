@@ -1,0 +1,21 @@
+#include <ESP8266WiFi.h>
+const char *ssid = "esp-K1-9675"; 
+
+void setup() {
+  Serial.begin(115200);
+  delay(1000);
+  Serial.println("\n--- Memulai ESP8266 Beacon FindMyClass ---");
+  
+  // Mengatur ESP8266 HANYA sebagai Access Point (Pemancar)
+  WiFi.mode(WIFI_AP);
+  
+  // Membuat jaringan WiFi Terbuka (tanpa password)
+  // HP hanya perlu membaca SSID ini tanpa harus terkoneksi
+  WiFi.softAP(ssid); 
+  
+  Serial.print("Beacon Aktif! Memancarkan SSID: ");
+  Serial.println(ssid);
+  Serial.println("Silakan cek radar WiFi di HP kamu, lek.");
+}
+
+void loop() {}
